@@ -209,43 +209,42 @@ export default function MyTickets() {
                     />
                   </Box>
 
-                  {!ticket.checkedInAt &&
-                    !ticket.isListed &&
-                    !ticket.isSoulBound && (
-                      <>
+                  {!ticket.checkedInAt && !ticket.isListed && (
+                    <>
+                      <Box mt={2}>
+                        <Button
+                          variant="contained"
+                          fullWidth
+                          onClick={() =>
+                            handleGenerateSignature(ticket.ticketId)
+                          }
+                        >
+                          產生簽章
+                        </Button>
+                      </Box>
+
+                      {signatures[ticket.ticketId] && (
                         <Box mt={2}>
-                          <Button
-                            variant="contained"
-                            fullWidth
-                            onClick={() =>
-                              handleGenerateSignature(ticket.ticketId)
-                            }
-                          >
-                            產生簽章
-                          </Button>
-                        </Box>
-
-                        {signatures[ticket.ticketId] && (
-                          <Box mt={2}>
-                            <Typography fontWeight="bold">
-                              驗票 QR Code:
-                            </Typography>
-                            <Box mt={1} display="flex" justifyContent="center">
-                              <QRCodeCanvas
-                                value={JSON.stringify({
-                                  ticketId: ticket.ticketId,
-                                  timestamp:
-                                    signatures[ticket.ticketId].timestamp,
-                                  message: signatures[ticket.ticketId].message,
-                                  signature:
-                                    signatures[ticket.ticketId].signature,
-                                })}
-                                size={200}
-                              />
-                            </Box>
+                          <Typography fontWeight="bold">
+                            驗票 QR Code:
+                          </Typography>
+                          <Box mt={1} display="flex" justifyContent="center">
+                            <QRCodeCanvas
+                              value={JSON.stringify({
+                                ticketId: ticket.ticketId,
+                                timestamp:
+                                  signatures[ticket.ticketId].timestamp,
+                                message: signatures[ticket.ticketId].message,
+                                signature:
+                                  signatures[ticket.ticketId].signature,
+                              })}
+                              size={200}
+                            />
                           </Box>
-                        )}
+                        </Box>
+                      )}
 
+                      {!ticket.isSoulBound && (
                         <Box mt={3}>
                           <Typography fontWeight="bold">
                             上架票券（ETH）
@@ -281,8 +280,9 @@ export default function MyTickets() {
                               : "📤 上架出售"}
                           </Button>
                         </Box>
-                      </>
-                    )}
+                      )}
+                    </>
+                  )}
                   {ticket.isListed && (
                     <Box mt={2}>
                       <Typography color="warning.main" fontWeight="bold">
