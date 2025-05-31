@@ -58,6 +58,13 @@ export default function MyTickets() {
 
       toast.success("上架成功！");
       setListingPrices((prev) => ({ ...prev, [ticketId]: "" }));
+
+      // ✅ 更新 UI 狀態為已上架
+      setTickets((prev) =>
+        prev.map((t) =>
+          t.ticketId === ticketId ? { ...t, isListed: true } : t
+        )
+      );
     } catch (err: any) {
       if (err.message?.includes("user rejected")) {
         toast.error("你取消了交易簽章");
