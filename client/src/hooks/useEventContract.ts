@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { useWallet } from "@/context/WalletContext";
 import abi from "@/abi/EventTicketing.json";
 
-const CONTRACT_ADDRESS = "0x98A341fd473426CAbf1816a88F5C30Ee58331b84";
+const CONTRACT_ADDRESS = "0x9f97a72C5623A6Ca05bd0dA56c1Eb9Cb7e0A6c1f";
 
 export function useEventContract() {
   const { signer } = useWallet();
